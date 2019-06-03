@@ -49,37 +49,33 @@ class ProductItem {
     }
 }
 class Cart {
-    constructor(){
-        // this.some это свойство с чем-то
-        // some(){} // что делает метод
+    constructor(container = '.cart'){
+        this.container = container; // node контейнер корзины
+        this.products = []; //массив с добавленными товарами
+        this.customer = {}; //сведения о покупателе
+        this.init();
     }
+    getCartContainerNode () {}; //возвращает node контейнер корзины
+    addProductToCart (product) {}; //добавим продукт с id в корзину
+    removeProductFromCart (id) {}; //удаляем продукт с id из корзины
+    removeAllCartItemsFromPage () {}; //удаляет все товары со страницы
+    render () {}; //добавляет товары находящиеся в корзине на страницу
+    getCartTotalSum () {}; //возвращает стоимость товаров корзине
+    getCartItemsQuantity () {}; //возвращает количество товаров в корзине
+    getCartInfo () {}; //возвращает состояние корзины
+    isProductInCart (product) {}; //проверяет наличие товара в корзине, true если нашёл, false если нет
+    getCartItemById (id) {}; //возвращает элемент массива this.products с указаным id, false если нет
+}
+
+class CartItem {
+    constructor (product) {
+        this.product = product; //ссылка на товар каталога
+        this.quantity = 1; //количество данного товара в корзине
+    }
+    render () {} //возвращает HTML товара для отображения в корзине
+    getProductTotalSum () {}; //возвращает стоимость товара в корзине
+
 }
 
 const products = new ProductsList();
 
-// const products = [
-//     {id: 1, title: 'Notebook', price: 2000},
-//     {id: 2, title: 'Mouse', price: 30},
-//     {id: 3, title: 'Keyboard', price: 55},
-//     {id: 4, title: 'Gamepad', price: 65},
-// ];
-//
-// const renderProduct = (title, price, img = `https://placehold.it/200x150`) => {
-//     return `<div class="product-item">
-//                  <img src="${img}" alt="${title}">
-//                  <div class="desc">
-//                      <h3>${title}</h3>
-//                      <p>${price}</p>
-//                      <button class="buy-btn">Купить</button>
-//                  </div>
-//              </div>`
-// };
-//
-// const renderPage = list => {
-//     // document.querySelector('.products').innerHTML = list.map(item => renderProduct(item.title, item.price)).join('');
-//     for (let product of list){
-//         document.querySelector('.products').insertAdjacentHTML('beforeend', renderProduct(product.title, product.price));
-//     }
-// };
-//
-// renderPage(products);
