@@ -15,7 +15,10 @@ class ProductsList {
             {id: 2, title: 'Mouse', price: 30},
             {id: 3, title: 'Keyboard', price: 55},
             {id: 4, title: 'Gamepad', price: 65},
-        ];
+            {id: 1, title: 'Notebook', price: 2000},
+            {id: 2, title: 'Mouse'},
+            {id: 3, title: 'Keyboard', price: 55},
+            {id: 4, title: 'Gamepad', price: 65},       ];
     }
     _render(){
         const block = document.querySelector(this.container);
@@ -39,7 +42,7 @@ class ProductItem {
                  <img src="${this.img}" alt="${this.title}">
                  <div class="desc">
                      <h3>${this.title}</h3>
-                     <p>${this.price}</p>
+                     <p>${isNaN(+this.price) ? 'Out of stock' : this.price.toFixed(2)}</p>
                      <button class="buy-btn">Купить</button>
                  </div>
              </div>`
