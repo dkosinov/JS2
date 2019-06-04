@@ -28,6 +28,14 @@ class ProductsList {
             block.insertAdjacentHTML('beforeend', product.render());
         }
     }
+    getCatalogTotalSum () {
+        let catalogTotalSum = 0;
+        for (let item of this.allProducts) {
+            if (!isNaN(item.price))
+                catalogTotalSum += item.price;
+        }
+        return catalogTotalSum;
+    }
 }
 
 class ProductItem {
@@ -78,4 +86,5 @@ class CartItem {
 }
 
 const products = new ProductsList();
+console.log(products.getCatalogTotalSum());
 
