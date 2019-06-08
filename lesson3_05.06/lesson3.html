@@ -150,11 +150,11 @@
                     resolve(xhr.responseText);
                 }
             }
-        }
+        };
         xhr.open('GET', url, true);
         xhr.send();
     }).then(data => console.log(data))
-        .catch(error => console.log('error'))
+        .catch(error => console.log('error'));
 
     getRequest(url);
 
