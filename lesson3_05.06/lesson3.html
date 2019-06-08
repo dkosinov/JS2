@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<div class="ajax-data"></div>
-<button class="ajax-get">Async get data</button>
+<!--<div class="ajax-data"></div>-->
+<!--<button class="ajax-get">Async get data</button>-->
 <script>
 
     // JSON
@@ -39,13 +39,13 @@
     // })
     // console.log(user1);
 
-//     Callback
-    const async = (a,cb) => {
-      setTimeout(() => {
-        const b = a + 1;
-        cb(b);
-      }, 5000);
-    }
+// //     Callback
+//     const async = (a,cb) => {
+//       setTimeout(() => {
+//         const b = a + 1;
+//         cb(b);
+//       }, 5000);
+//     }
 
     
 //     let num = (a, cb) => {
@@ -135,7 +135,28 @@
 
 
 
+//Homework 2
+    const url = `https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json`;
 
+    let getRequest = (url) => new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        // window.ActiveXObject -> xhr = new ActiveXObject();
+
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === 4){
+                if(xhr.status !== 200){
+                    reject('Error');
+                } else {
+                    resolve(xhr.responseText);
+                }
+            }
+        }
+        xhr.open('GET', url, true);
+        xhr.send();
+    }).then(data => console.log(data))
+        .catch(error => console.log('error'))
+
+    getRequest(url);
 
 
 

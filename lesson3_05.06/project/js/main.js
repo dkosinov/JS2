@@ -1,4 +1,4 @@
-const API = `https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses`;
+const API = `https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/`;
 
 // let getRequest = (url, cb) => {
 //     let xhr = new XMLHttpRequest();
@@ -14,6 +14,8 @@ const API = `https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 //         }
 //     }
 // };
+
+
 
 class ProductsList {
     constructor(container = '.products'){
