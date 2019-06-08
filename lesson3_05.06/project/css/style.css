@@ -7,6 +7,7 @@ header{
     justify-content: space-between;
     color: #fafafa;
     padding: 30px 80px;
+    position: relative;
 }
 button{
     outline: none;
@@ -33,6 +34,21 @@ button{
 .btn-cart, .logo{
     align-self: center;
 }
+.cart {
+    width: 300px;
+    height: 200px;
+    background-color: #fafafa;
+    position: absolute;
+    right: 80px;
+    top: 50px;
+    border-radius: 5px;
+    display: none;
+}
+
+.cart_visible_on {
+    display: block;
+}
+
 .products{
     column-gap: 30px;
     display: grid;
