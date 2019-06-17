@@ -38,6 +38,9 @@ Vue.component('cart', {
                     }
                 })
         },
+        getTotalQuantity(){
+            return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        }
     },
     mounted(){
         this.$parent.getJson(`${API + this.cartUrl}`)
@@ -48,17 +51,19 @@ Vue.component('cart', {
             });
     },
     template: `<div>
-<button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
-<div class="cart-block" v-show="showCart">
-            <p v-if="!cartItems.length">Cart is empty</p>
-            <cart-item 
-            v-for="item of cartItems" 
-            :key="item.id_product"
-            :img="imgCart"
-            :cart-item="item"
-            @remove="remove"></cart-item>
-        </div>
-</div>`
+                    <button class="btn-cart" type="button" @click="showCart = !showCart">
+                        Корзина ({{getTotalQuantity()}})
+                    </button>
+                    <div class="cart-block" v-show="showCart">
+                        <p v-if="!cartItems.length">Cart is empty</p>
+                        <cart-item 
+                        v-for="item of cartItems" 
+                        :key="item.id_product"
+                        :img="imgCart"
+                        :cart-item="item"
+                        @remove="remove"></cart-item>
+                    </div>
+               </div>`
 });
 
 Vue.component('cart-item', {
