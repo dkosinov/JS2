@@ -11,7 +11,12 @@ Vue.component('products', {
         filter(value){
             let regexp = new RegExp(value, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
-        }
+        },
+        dropFilter(value){
+            if (value === ""){
+                this.filtered = this.products;
+            }
+        },
     },
     mounted(){
         this.$parent.getJson(`${API + this.catalogUrl}`)
