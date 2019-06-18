@@ -6,7 +6,11 @@ const app = new Vue({
         getJson(url){
             return fetch(url)
                 .then(result => result.json())
-                .catch(error => console.log(error))
+                .catch(error => {
+                    //работаем с компонентом error
+                    this.$refs.error.setError('app.error');
+                })
+                // .catch(error => console.log(error))
         },
     }
 })

@@ -25,6 +25,10 @@ Vue.component('products', {
                     this.products.push(el);
                     this.filtered.push(el);
                 }
+            })
+            .catch (error => {
+                //работаем с компонентом error
+                this.$parent.$refs.error.setError(`products.error: Ошибка получения данных по адресу: ${API + this.catalogUrl}`);
             });
         this.$parent.getJson(`getProducts.json`)
             .then(data => {
@@ -33,6 +37,10 @@ Vue.component('products', {
                     this.filtered.push(el);
                 }
             })
+            .catch (error => {
+                //работаем с компонентом error
+                this.$parent.$refs.error.setError(`products.error: Ошибка получения данных по адресу: getProducts.json`);
+            });
     },
     template: `<div class="products">
         <product 

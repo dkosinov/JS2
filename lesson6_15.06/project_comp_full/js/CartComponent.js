@@ -2,10 +2,28 @@ Vue.component('cart', {
     data(){
       return {
           cartUrl: `/getBasket.json`,
+          // cartUrl: `/getBasket.json`,
           cartItems: [],
           showCart: false,
           imgCart: `https://placehold.it/50x100`
       }
+    },
+    computed: {
+        totalQuantity: function(){
+            return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        }
+    },
+    mounted(){
+        this.$parent.getJson(`${API + this.cartUrl}`)
+            .then(data => {
+                for(let el of data.contents){
+                    this.cartItems.push(el);
+                }
+            })
+            .catch (error => {
+                //работаем с компонентом error
+                this.$parent.$refs.error.setError(`cart.error: Ошибка получения данных по адресу: ${API + this.cartUrl}`);
+            })
     },
     methods: {
         addProduct(product){
@@ -38,23 +56,24 @@ Vue.component('cart', {
                     }
                 })
         },
-        getTotalQuantity(){
-            return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
-        }
-    },
-    mounted(){
-        this.$parent.getJson(`${API + this.cartUrl}`)
-            .then(data => {
-                for(let el of data.contents){
-                    this.cartItems.push(el);
-                }
-            });
+        // getTotalQuantity(){
+        //     return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        // }
     },
     template: `<div>
                     <button class="btn-cart" type="button" @click="showCart = !showCart">
-                        Корзина ({{getTotalQuantity()}})
+                        Корзина ({{totalQuantity}})
                     </button>
-                    <div class="cart-block" v-show="showCart">
+<!--                    <div class="cart-block" v-show="showCart">-->
+<!--                        <p v-if="!cartItems.length">Cart is empty</p>-->
+<!--                        <cart-item -->
+<!--                        v-for="item of cartItems" -->
+<!--                        :key="item.id_product"-->
+<!--                        :img="imgCart"-->
+<!--                        :cart-item="item"-->
+<!--                        @remove="remove"></cart-item>-->
+<!--                    </div>                    -->
+                    <div class="cart-block" :class="{invisible: !showCart}">
                         <p v-if="!cartItems.length">Cart is empty</p>
                         <cart-item 
                         v-for="item of cartItems" 
